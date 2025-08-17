@@ -1,0 +1,7 @@
+println("Hello, NupizLang!")
+println("Testing basic functionality...")
+
+x = 5
+y = 10
+result = x + y
+println("5 + 10 = " + result)

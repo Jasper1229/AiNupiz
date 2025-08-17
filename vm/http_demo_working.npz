@@ -1,0 +1,27 @@
+// HTTP Library Demo for NupizLang
+// This demonstrates the basic usage of the HTTP package
+
+import http;
+import std;
+
+// Test URL parsing
+std.println("Testing URL parsing...");
+let url = "https://api.example.com:8080/users?page=1&limit=10";
+let host = http.parseUrl(url);
+
+std.println("Parsed URL: " + url);
+std.println("Host: " + host);
+
+// Test with different URL formats
+let url2 = "http://httpbin.org/get";
+let host2 = http.parseUrl(url2);
+std.println("URL 2: " + url2);
+std.println("Host 2: " + host2);
+
+let url3 = "https://github.com/user/repo";
+let host3 = http.parseUrl(url3);
+std.println("URL 3: " + url3);
+std.println("Host 3: " + host3);
+
+std.println("\nHTTP library demo completed successfully!");
+std.println("Note: HTTP GET/POST functions are currently stubs and will return errors.");

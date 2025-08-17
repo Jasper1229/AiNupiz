@@ -1,0 +1,63 @@
+// HTTP Library Demo for NupizLang
+// This demonstrates the basic usage of the HTTP package
+
+import http
+
+// Simple GET request to a public API
+println("Making GET request to httpbin.org...")
+response = http.get("http://httpbin.org/get")
+
+if response.ok {
+    println("Status: " + response.status)
+    println("Response body:")
+    println(response.body)
+} else {
+    println("Error: " + response.error)
+}
+
+// POST request with JSON data
+println("\nMaking POST request...")
+headers = {"Content-Type": "application/json"}
+data = '{"name": "NupizLang", "version": "1.0", "feature": "HTTP"}'
+
+response = http.post("http://httpbin.org/post", data, headers)
+
+if response.ok {
+    println("POST Status: " + response.status)
+    println("POST Response:")
+    println(response.body)
+} else {
+    println("POST Error: " + response.error)
+}
+
+// URL parsing example
+println("\nParsing URL...")
+url = "https://api.example.com:8080/users?page=1&limit=10"
+components = http.parseUrl(url)
+
+println("Scheme: " + components.scheme)
+println("Host: " + components.host)
+println("Port: " + components.port)
+println("Path: " + components.path)
+println("Query: " + components.query)
+
+// URL encoding/decoding
+println("\nURL encoding/decoding...")
+original = "Hello World! How are you?"
+encoded = http.encodeUrl(original)
+decoded = http.decodeUrl(encoded)
+
+println("Original: " + original)
+println("Encoded: " + encoded)
+println("Decoded: " + decoded)
+
+// Error handling example
+println("\nTesting error handling...")
+badResponse = http.get("http://invalid-domain-that-does-not-exist.com")
+
+if !badResponse.ok {
+    println("Expected error: " + badResponse.error)
+} else {
+    println("Unexpected success!")
+}
+

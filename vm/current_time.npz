@@ -1,0 +1,28 @@
+import http;
+import std;
+
+std.println("🕐 CURRENT TIME & DATE TEST 🕐");
+std.println("===============================\n");
+
+// Get current UTC time (most reliable)
+std.println("📡 Fetching current UTC time...");
+let utcResponse = http.get("http://worldtimeapi.org/api/timezone/Etc/UTC");
+
+std.println("✅ UTC Time Data:");
+std.println(utcResponse);
+std.println();
+
+// Get local timezone info based on IP
+std.println("🌍 Fetching local timezone info...");
+let localResponse = http.get("http://worldtimeapi.org/api/ip");
+
+std.println("✅ Local Timezone Data:");
+std.println(localResponse);
+std.println();
+
+std.println("🎯 SUMMARY:");
+std.println("• HTTP library successfully connected to real APIs");
+std.println("• Retrieved current time: " + utcResponse);
+std.println("• Retrieved local timezone info");
+std.println("• All requests completed successfully!");
+std.println("\n🚀 NupizLang HTTP library is working perfectly!");

@@ -1,0 +1,31 @@
+import http;
+import std;
+
+std.println("Testing HTTP GET with Time & Date APIs...");
+
+// Test 1: Get current time from WorldTime API
+std.println("Making GET request to WorldTime API...");
+let timeResponse = http.get("http://worldtimeapi.org/api/timezone/Etc/UTC");
+
+std.println("Current UTC Time Response:");
+std.println(timeResponse);
+
+std.println("\n--- End of time response ---");
+
+// Test 2: Get current date from a simple time service
+std.println("\nMaking GET request to simple time service...");
+let dateResponse = http.get("http://date.jsontest.com/");
+
+std.println("Current Date Response:");
+std.println(dateResponse);
+
+std.println("\n--- End of date response ---");
+
+// Test 3: Get timezone info
+std.println("\nMaking GET request to timezone API...");
+let tzResponse = http.get("http://worldtimeapi.org/api/ip");
+
+std.println("Timezone Info Response:");
+std.println(tzResponse);
+
+std.println("\nTime & Date API test completed!");

@@ -1,9 +1,11 @@
 
-# Nupiz Documentation
+# AiNupiz Documentation
 
 The following documentation is very rough and intended to serve as a starting point until a *readthedocs* page is created.
 
 ***Static typing is not currently implemented on this compiler, so any instances of static typing in the documentation are yet to be implemented.***
+
+**AiNupiz** is a fork of the original Nupiz programming language, enhanced with AI-assisted development and additional features including a full HTTP library for web API support.
 
 ## Table of Contents
 

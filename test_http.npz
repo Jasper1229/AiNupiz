@@ -1,0 +1,14 @@
+import http
+
+println("Testing HTTP library...")
+
+// Simple test - just try to parse a URL
+url = "https://example.com/test"
+components = http.parseUrl(url)
+
+println("URL parsing test:")
+println("Scheme: " + components.scheme)
+println("Host: " + components.host)
+println("Port: " + components.port)
+
+println("HTTP library test completed!")

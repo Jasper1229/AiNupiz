@@ -3,9 +3,6 @@
 #define jp_npmap_h
 
 #include <unordered_map>
-
-extern "C" {
-
 #include "../core/extension.h"
 #include "../../util/hashvalue.hpp"
 
@@ -21,8 +18,8 @@ static const char* npmapPtrOrigin = "nupiz.map";
     AS_PTR(val)->typeEncoding == 0)
 #define AS_NPMAP(val) ((NPMap*) AS_PTR(val)->ptr)
 
+extern "C" {
 ObjPtr* newNPMap(VM* vm, unordered_valmap* map);
-
 }
 
 #endif

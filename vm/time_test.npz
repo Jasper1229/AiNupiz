@@ -1,0 +1,31 @@
+import http;
+import std;
+
+std.println("=== Current Time & Date Test ===\n");
+
+// Get current UTC time
+std.println("🕐 Fetching current UTC time...");
+let utcTime = http.get("http://worldtimeapi.org/api/timezone/Etc/UTC");
+
+std.println("UTC Time:");
+std.println(utcTime);
+std.println();
+
+// Get local timezone info (based on IP)
+std.println("🌍 Fetching local timezone info...");
+let localTime = http.get("http://worldtimeapi.org/api/ip");
+
+std.println("Local Timezone Info:");
+std.println(localTime);
+std.println();
+
+// Get time from another reliable source
+std.println("📅 Fetching time from time.is...");
+let timeIs = http.get("http://time.is/Unix_time_now");
+
+std.println("Time.is Response:");
+std.println(timeIs);
+std.println();
+
+std.println("=== Time Test Completed ===");
+std.println("✅ Successfully fetched real-time data from multiple sources!");

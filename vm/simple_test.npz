@@ -1,0 +1,9 @@
+import std;
+
+std.println("Hello, NupizLang!");
+std.println("Testing basic functionality...");
+
+let x = 5;
+let y = 10;
+let result = x + y;
+std.println("5 + 10 = " + std.asString(result));

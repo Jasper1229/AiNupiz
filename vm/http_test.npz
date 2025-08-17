@@ -1,0 +1,19 @@
+import http;
+import std;
+
+std.println("Testing HTTP library...");
+
+// Test 1: Basic library import
+std.println("HTTP library imported successfully");
+
+// Test 2: Try to parse a URL
+std.println("Attempting to parse URL...");
+let url = "https://example.com/test";
+
+// This should work if the library is loaded
+let host = http.parseUrl(url);
+
+std.println("URL parsing completed");
+std.println("Host: " + host);
+
+std.println("HTTP library test completed!");

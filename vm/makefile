@@ -1,38 +1,70 @@
 
 CFLAGS = -Wall -Wno-incompatible-pointer-types-discards-qualifiers
-CPPFLAGS = -Wall -std=c++20
+CPPFLAGS = -Wall -std=c++2a
 
 SRCDIR = .
 OBJDIR = ../lib
 
-C_SRC=$(shell find $(SRCDIR) -name "*.c")
-CPP_SRC = $(shell find $(SRCDIR) -name "*.cpp")
+# Explicitly list all source files instead of using find
+C_SRC = main.c \
+         vm/vm.c \
+         vm/value.c \
+         vm/object.c \
+         vm/loader.c \
+         compiler/chunk.c \
+         compiler/compiler.c \
+         compiler/dumper.c \
+         compiler/scanner.c \
+         util/debug.c \
+         util/memory.c \
+         util/table.c \
+         libraries/core/extension.c \
+         libraries/core/manager.c \
+         libraries/std/nplib.c \
+         libraries/fileio/filelib.c \
+         libraries/http/httplib.c
 
-C_OBJ=$(patsubst $(SRCDIR)/%.c,$(OBJDIR)/%.o,$(C_SRC))
-CPP_OBJ=$(patsubst $(SRCDIR)/%.cpp,$(OBJDIR)/%.o,$(CPP_SRC))
+CPP_SRC = util/hashing.cpp \
+           util/hashvalue.cpp \
+           libraries/http/httpclient.cpp
 
-OBJ=$(C_OBJ) $(CPP_OBJ)
+C_OBJ = $(patsubst %.c,$(OBJDIR)/%.o,$(C_SRC))
+CPP_OBJ = $(patsubst %.cpp,$(OBJDIR)/%.o,$(CPP_SRC))
 
-TARGET=../build/npz
+OBJ = $(C_OBJ) $(CPP_OBJ)
 
-all: $(OBJDIR) $(TARGET)
+TARGET = ../build/npz
+
+# Create all necessary directories
+DIRS = $(OBJDIR) \
+       $(OBJDIR)/vm \
+       $(OBJDIR)/compiler \
+       $(OBJDIR)/util \
+       $(OBJDIR)/libraries \
+       $(OBJDIR)/libraries/core \
+       $(OBJDIR)/libraries/std \
+       $(OBJDIR)/libraries/fileio \
+       $(OBJDIR)/libraries/http \
+       $(OBJDIR)/libraries/vec \
+       $(OBJDIR)/libraries/maps \
+       ../build
+
+all: $(DIRS) $(TARGET)
 
 rebuild:
 	make clean
 	make all
 
-$(OBJDIR):
-	mkdir -p $(OBJDIR)
+$(DIRS):
+	mkdir $@
 
 $(TARGET): $(OBJ)
-	g++ $(OBJ) -o $@
+	g++ $(OBJ) -o $@ -lws2_32
 
-$(OBJDIR)/%.o: $(SRCDIR)/%.c
-	mkdir -p `dirname $@`
+$(OBJDIR)/%.o: %.c
 	gcc $(CFLAGS) -c $< -o $@
 
-$(OBJDIR)/%.o: $(SRCDIR)/%.cpp
-	mkdir -p `dirname $@`
+$(OBJDIR)/%.o: %.cpp
 	g++ $(CPPFLAGS) -c $< -o $@
 
 clean:
